@@ -116,7 +116,16 @@ function render(trip) {
   };
 }
 
+function setupGuide() {
+  const dlg = document.getElementById("guide");
+  document.addEventListener("click", (e) => { if (e.target.closest("[data-guide], #guide-open")) dlg.showModal(); });
+  document.getElementById("guide-close").onclick = () => dlg.close();
+  // 바깥(backdrop) 클릭으로 닫기
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+}
+
 async function main() {
+  setupGuide();
   const app = document.getElementById("app");
   try {
     data = await (await fetch("data.json", { cache: "no-store" })).json();
@@ -128,7 +137,10 @@ async function main() {
     document.getElementById("warn").innerHTML =
       `<div class="warn"><b>시트에서 건너뛴 행이 있어요</b><br>${data.warnings.map(esc).join("<br>")}</div>`;
   }
-  if (!data.trips.length) { app.innerHTML = `<p class="loading">아직 기록된 여정이 없어요.</p>`; return; }
+  if (!data.trips.length) {
+    app.innerHTML = `<p class="loading">아직 기록된 여정이 없어요.<br><button class="btn" data-guide style="margin-top:12px">시트 쓰는 법 보기</button></p>`;
+    return;
+  }
 
   const sel = document.getElementById("trip");
   sel.innerHTML = data.trips.map((t, i) => `<option value="${i}">${esc(t.name)}</option>`).join("");

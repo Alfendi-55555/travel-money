@@ -18,8 +18,64 @@
       <img src="icon.svg" alt="" width="32" height="32">
       <span class="wordmark">여<em>정</em>산</span>
     </a>
-    <select id="trip" aria-label="여행 선택" hidden></select>
+    <div class="top-actions">
+      <select id="trip" aria-label="여행 선택" hidden></select>
+      <button class="icon-btn" id="guide-open" aria-label="사용 가이드" title="사용 가이드">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.6-2.7 4"/><circle cx="12" cy="17.3" r=".6" fill="currentColor"/></svg>
+      </button>
+    </div>
   </header>
+
+  <dialog id="guide" aria-labelledby="guide-title">
+    <div class="g-head">
+      <h2 id="guide-title">여<em>정</em>산 사용 가이드</h2>
+      <button class="icon-btn" id="guide-close" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="g-body">
+      <p class="g-lead">여행 중엔 구글 시트에 <b>결제할 때마다 한 줄씩</b> 적기만 하세요. 계산과 정리는 여정산이 합니다.</p>
+
+      <h3><span class="step">1</span>시트는 이렇게</h3>
+      <p class="sub">첫 줄은 아래 제목 그대로 적어 주세요.</p>
+      <div class="g-table">
+        <table>
+          <thead><tr><th>여행</th><th>일자</th><th>결제자</th><th>항목</th><th>금액</th><th>통화</th><th>정산 대상</th></tr></thead>
+          <tbody>
+            <tr><td>오사카 2026</td><td>2026-10-03</td><td>민수</td><td>숙소</td><td>450000</td><td></td><td></td></tr>
+            <tr><td>오사카 2026</td><td>2026-10-03</td><td>지수</td><td>라멘</td><td>8200</td><td>JPY</td><td>민수, 지수</td></tr>
+            <tr><td>오사카 2026</td><td>2026-10-04</td><td>민수</td><td>택시</td><td>30000</td><td></td><td>지수:2, 민수:1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <dl class="g-cols">
+        <div><dt>여행</dt><dd>같은 이름끼리 한 여행으로 묶여요. 다음 여행은 같은 시트 아래에 이어서 적으면 돼요.</dd></div>
+        <div><dt>일자</dt><dd><code>2026-10-03</code> 형식. 가장 빠른 날짜가 자동으로 <b>DAY 1</b>이 돼요.</dd></div>
+        <div><dt>결제자</dt><dd>실제로 카드를 긁은 사람.</dd></div>
+        <div><dt>항목</dt><dd>숙소, 저녁, 택시처럼 나중에 알아볼 이름.</dd></div>
+        <div><dt>금액</dt><dd>숫자만. <code>450,000</code>처럼 쉼표가 있어도 괜찮아요.</dd></div>
+        <div><dt>통화</dt><dd>비우면 원화. 외화면 <code>JPY</code> <code>USD</code>처럼 적어요.</dd></div>
+        <div><dt>정산 대상</dt><dd>이 돈을 나눠 낼 사람. 아래를 참고하세요.</dd></div>
+      </dl>
+
+      <h3><span class="step">2</span>정산 대상 쓰는 법</h3>
+      <ul class="g-rules">
+        <li><div class="g-in"><span class="g-empty">비워 두기</span> 또는 <code>전원</code></div><div class="g-out">모두가 똑같이 N빵</div></li>
+        <li><div class="g-in"><code>민수, 지수</code></div><div class="g-out">적은 사람끼리만 똑같이<span class="sub">둘만 먹은 저녁, 둘만 탄 택시</span></div></li>
+        <li><div class="g-in"><code>지수:2, 민수:1</code></div><div class="g-out">비율대로 나누기<span class="sub">30,000원이면 지수 20,000 · 민수 10,000</span></div></li>
+        <li><div class="g-in"><code>지수</code></div><div class="g-out">한 사람이 전부 부담<span class="sub">대신 결제해 준 경우</span></div></li>
+      </ul>
+
+      <h3><span class="step">3</span>알아 두면 좋은 것</h3>
+      <ul class="g-tips">
+        <li><b>이름은 매번 똑같이.</b> <code>민수</code>와 <code>민스</code>는 다른 사람으로 계산돼요.</li>
+        <li>돈을 한 번도 안 낸 사람도 <b>정산 대상에 한 번은 이름이 나와야</b> 참가자로 잡혀요.</li>
+        <li>1원 단위로 안 나눠떨어지는 끝전은 결제자가 부담해요.</li>
+        <li>날짜·결제자·금액이 잘못된 줄은 계산에서 빠지고, 페이지 맨 위에 <b>몇 번째 줄인지</b> 알려 드려요.</li>
+        <li>페이지는 <b>매일 자정</b>에 시트 내용으로 새로 고쳐져요.</li>
+      </ul>
+    </div>
+  </dialog>
   <p class="tagline">여정은 추억으로, 정산은 깔끔하게</p>
   <div id="warn"></div>
   <div id="app"><p class="loading">여정을 불러오는 중…</p></div>
