@@ -1,0 +1,34 @@
+:root {
+  --bg: #f7f7f5; --card: #fff; --text: #1d1d1b; --sub: #6b6b66; --line: #e6e6e1;
+  --accent: #2a6df4; --plus: #1a8f4c; --minus: #d64545;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #151514; --card: #1f1f1d; --text: #efefec; --sub: #9a9a93; --line: #33332f;
+    --accent: #6f9bff; --plus: #4cc17f; --minus: #ff7a7a; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+main { max-width: 640px; margin: 0 auto; padding: 16px; }
+header { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 14px; color: var(--sub); margin: 24px 0 8px; font-weight: 600; }
+select { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--card); color: var(--text); max-width: 60%; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; }
+.total { font-size: 28px; font-weight: 700; }
+.sub { color: var(--sub); font-size: 13px; }
+.row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; }
+.row + .row { border-top: 1px solid var(--line); }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.plus { color: var(--plus); } .minus { color: var(--minus); }
+.arrow { color: var(--sub); padding: 0 4px; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+summary::-webkit-details-marker { display: none; }
+summary b { font-size: 16px; }
+.items { padding: 0 14px 8px; }
+.item .name { font-weight: 600; }
+.warn { background: #fff4d6; color: #5c4400; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 8px; }
+@media (prefers-color-scheme: dark) { .warn { background: #3a3117; color: #f0dca0; } }
+footer { color: var(--sub); font-size: 12px; margin-top: 24px; text-align: center; }
