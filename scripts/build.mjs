@@ -30,5 +30,12 @@ data.generatedAt = new Date().toISOString();
 
 await mkdir(resolve(root, "site"), { recursive: true });
 await writeFile(resolve(root, "site/data.json"), JSON.stringify(data));
+
+// 배포 때 정적 파일 주소에 커밋 버전을 붙여, 캐시된 이전 CSS/JS와 섞이지 않게 함
+if (process.env.GITHUB_SHA) {
+  const html = resolve(root, "site/index.html");
+  const v = process.env.GITHUB_SHA.slice(0, 7);
+  await writeFile(html, (await readFile(html, "utf8")).replaceAll("?v=dev", `?v=${v}`));
+}
 console.log(`여행 ${data.trips.length}개, 경고 ${data.warnings.length}건`);
 for (const w of data.warnings) console.warn("  경고:", w);
